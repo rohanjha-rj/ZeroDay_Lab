@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <div className="flex h-screen overflow-hidden" style={{ background: 'var(--bg-primary)' }}>
           <Sidebar />
           <div className="flex flex-col flex-1 overflow-hidden">

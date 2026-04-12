@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
-import LabLayout from '@/components/LabLayout';
+import LabLayout, { useLab } from '@/components/LabLayout';
 import { simulateSQLi } from '@/lib/attackEngine';
 
 function SQLiTargetApp() {
+  const { executeAttack } = useLab();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus, setLoginStatus] = useState<null | 'trying' | 'blocked'>(null);
@@ -56,7 +57,10 @@ function SQLiTargetApp() {
             </div>
 
             <button
-              onClick={() => setLoginStatus('trying')}
+              onClick={() => {
+                setLoginStatus('trying');
+                executeAttack(username, password);
+              }}
               className="btn-primary"
               style={{ width: '100%', marginTop: 4 }}
             >

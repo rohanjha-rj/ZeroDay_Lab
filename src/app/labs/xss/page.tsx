@@ -1,9 +1,10 @@
 'use client';
 import { useState } from 'react';
-import LabLayout from '@/components/LabLayout';
+import LabLayout, { useLab } from '@/components/LabLayout';
 import { simulateXSS } from '@/lib/attackEngine';
 
 function XSSTargetApp() {
+  const { executeAttack } = useLab();
   const [search, setSearch] = useState('');
   const [submitted, setSubmitted] = useState('');
   const [comments, setComments] = useState([
@@ -52,7 +53,10 @@ function XSSTargetApp() {
                 style={{ flex: 1 }}
               />
               <button
-                onClick={() => setSubmitted(search)}
+                onClick={() => {
+                  setSubmitted(search);
+                  executeAttack(search);
+                }}
                 className="btn-ghost"
               >
                 Search
@@ -94,6 +98,7 @@ function XSSTargetApp() {
                 onClick={() => {
                   if (comment) {
                     setComments((prev) => [...prev, { user: 'hacker', text: comment }]);
+                    executeAttack(comment);
                     setComment('');
                   }
                 }}

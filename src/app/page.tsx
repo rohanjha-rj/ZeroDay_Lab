@@ -80,15 +80,16 @@ export default function Dashboard() {
     let frame = 0;
     const text = 'ZERODAY LAB';
     const t = setInterval(() => {
-      if (frame < 12) {
+      if (frame < 5) { // Faster glitch burst
         const glitched = text.split('').map((c, i) =>
-          Math.random() < 0.3 ? chars[Math.floor(Math.random() * chars.length)] : c
+          Math.random() < 0.2 ? chars[Math.floor(Math.random() * chars.length)] : c
         ).join('');
         setGlitchText(glitched);
         frame++;
       } else {
         setGlitchText(text);
-        frame = 0;
+        if (frame > 60) frame = 0; // Longer pause between glitches
+        else frame++;
       }
     }, 100);
     return () => clearInterval(t);
