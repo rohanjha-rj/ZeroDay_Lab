@@ -15,7 +15,7 @@ interface TerminalProps {
 
 export default function CyberTerminal({ onClose }: TerminalProps) {
   const [lines, setLines] = useState<TerminalLine[]>([
-    { id: 0, type: 'info', content: '>>> CyberSec Lab Terminal v1.0.0 init...' },
+    { id: 0, type: 'info', content: '>>> ZeroDay Lab Terminal v1.1.0 init...' },
     { id: 1, type: 'info', content: '>>> Security Environment: Isolated-Sandbox' },
     { id: 2, type: 'info', content: '>>> System Status: Ready' },
     { id: 4, type: 'info', content: '' },
@@ -133,7 +133,7 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
       >
         <TermIcon size={14} style={{ color: 'var(--text-muted)' }} />
         <span style={{ flex: 1, fontSize: 11, color: 'var(--text-muted)', fontWeight: 500, letterSpacing: '0.05em' }}>
-          cybersec-lab / bin / bash
+          zeroday-lab / bin / bash
         </span>
         <div style={{ display: 'flex', gap: 6 }}>
           <button

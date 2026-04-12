@@ -116,7 +116,31 @@ export const useProgressStore = create<ProgressState>()(
       },
     }),
     {
-      name: 'cybersec-progress',
+      name: 'zeroday-progress',
+      onRehydrateStorage: (state) => {
+        return (rehydratedState, error) => {
+          if (!error && rehydratedState) {
+            // Check if we need to migrate from the old key
+            if (typeof window !== 'undefined' && !localStorage.getItem('zeroday-progress')) {
+              const legacyData = localStorage.getItem('cybersec-progress');
+              if (legacyData) {
+                try {
+                  const parsed = JSON.parse(legacyData);
+                  if (parsed.state) {
+                    rehydratedState.addXP(parsed.state.xp || 0);
+                    // Manually merge other fields if necessary
+                    // For simplicity, we just trigger a save to the new key
+                    localStorage.setItem('zeroday-progress', legacyData);
+                    console.log('Successfully migrated legacy CyberSec Lab data to ZeroDay Lab.');
+                  }
+                } catch (e) {
+                  console.error('Failed to migrate legacy data:', e);
+                }
+              }
+            }
+          }
+        };
+      },
     }
   )
 );

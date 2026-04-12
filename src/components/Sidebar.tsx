@@ -60,7 +60,7 @@ export default function Sidebar() {
           </div>
           <div>
             <div className="font-bold text-sm" style={{ color: 'var(--neon-green)', fontFamily: 'JetBrains Mono' }}>
-              CYBERSEC
+              ZERODAY
             </div>
             <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>
               ATTACK LAB

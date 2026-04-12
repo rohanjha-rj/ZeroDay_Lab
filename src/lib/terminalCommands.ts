@@ -14,7 +14,7 @@ const COMMANDS: Record<string, CommandHandler> = {
   help: () => ({
     type: 'info',
     output: `
-[CYBERSEC LAB TERMINAL v1.0]
+[ZERODAY LAB TERMINAL v1.1]
 ─────────────────────────────────────────
 Available commands:
 
@@ -48,6 +48,14 @@ Available commands:
 
 Type a command to get started!
 ─────────────────────────────────────────`,
+  }),
+
+  about: () => ({
+    type: 'info',
+    output: `--- ZeroDay Lab ---
+An enterprise-grade cybersecurity simulator designed for offensive and defensive training.
+Version: 2.1.0 (Enterprise)
+Status: Fully Sandboxed`,
   }),
 
   whoami: () => ({

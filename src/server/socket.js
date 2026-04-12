@@ -31,6 +31,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('join-room', ({ roomId, role, username }) => {
+    socket._username = username; // Store for cleanup
     const room = rooms[roomId];
     if (!room) return socket.emit('error', 'Room not found');
 
@@ -75,6 +76,21 @@ io.on('connection', (socket) => {
 
   socket.on('disconnect', () => {
     console.log(`Socket disconnected: ${socket.id}`);
+    
+    // Cleanup rooms
+    Object.keys(rooms).forEach(roomId => {
+      const room = rooms[roomId];
+      if (room.attacker === socket._username) room.attacker = null;
+      if (room.defender === socket._username) room.defender = null;
+      
+      if (!room.attacker && !room.defender) {
+        delete rooms[roomId];
+      } else {
+        io.to(roomId).emit('room-updated', room);
+      }
+    });
+
+    io.emit('rooms-list', Object.values(rooms));
   });
 });
 

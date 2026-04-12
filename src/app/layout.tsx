@@ -4,8 +4,8 @@ import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
 
 export const metadata: Metadata = {
-  title: "CyberSec Lab — Attack Simulator",
-  description: "A virtual cybersecurity lab to safely simulate real attacks: XSS, SQL Injection, CSRF, and more. Learn ethical hacking with real-time visualization.",
+  title: "ZeroDay Lab — Advanced Cybersecurity Simulator",
+  description: "A virtual cybersecurity lab for simulating real-world attacks in a safe, sandboxed environment.",
   keywords: ["cybersecurity", "ethical hacking", "XSS", "SQL injection", "CTF", "penetration testing"],
 };
 

@@ -61,7 +61,7 @@ export default function AttackVisualizer({ visualization, isRunning }: Props) {
   const getPacketPos = (step: VisualStep, progress: number) => {
     const from = NODES[step.from as NodeKey];
     const to = NODES[step.to as NodeKey];
-    if (!from || !to) return { x: 0, y: 0 };
+    if (!from || !to) return { x: 280, y: 160 }; // Fallback to center
     const t = progress / 100;
     return {
       x: from.x + (to.x - from.x) * t,
@@ -91,7 +91,7 @@ export default function AttackVisualizer({ visualization, isRunning }: Props) {
       }}
     >
       <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 12, fontFamily: 'JetBrains Mono', letterSpacing: '0.1em' }}>
-        ATTACK FLOW VISUALIZER
+        ZERODAY LAB — ATTACK FLOW VISUALIZER
       </div>
 
       {/* SVG graph */}

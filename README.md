@@ -1,72 +1,48 @@
-# 🛡️ Cybersec Attack Simulator
+# 🛡️ ZeroDay Lab (v2.1)
 
-A fully interactive, visually stunning, **full-stack web vulnerability sandbox**. This platform is designed to teach offensive and defensive security concepts safely by directly executing sophisticated exploit logic against isolated Node.js API endpoints backed by a Prisma + SQLite database structure.
+A professional-grade, enterprise-ready **cybersecurity simulation platform**. ZeroDay Lab allows users to safely execute real-world attack vectors against isolated API endpoints, providing deep visibility into vulnerability mechanics through advanced data visualization and real-time multiplayer orchestration.
 
-![Dashboard Preview](https://via.placeholder.com/1200x600/050a10/00ff88?text=Cybersec+Simulator)
+![Dashboard Preview](https://via.placeholder.com/1200x600/0a0a0a/00ff88?text=ZeroDay+Lab+Dashboard)
 
 ## 🌟 Key Features
 
-1. **True API Exploits**: Unlike traditional browser-only sandboxes, this simulator ships with real `Next.js API Route Handlers` and a connected `SQLite` database. When you run an SQL injection, it legitimately parses un-escaped SQL concatenation using Prisma's `$queryRawUnsafe()`. 
-2. **8 Interactive Labs**:
-   - **XSS** (Reflected & Stored payloads impacting DOM states)
-   - **SQL Injection** (UNION based and destructive database query dumping)
-   - **CSRF** (Forged session-aware payloads mapped to backend REST logic)
-   - **Broken Authentication** (Bypassing JWT signatures via `alg: none` and Cookie manipulation)
-   - **File Upload** (Validating weak MIME type defenses allowing RCE Webshells)
-   - **SSRF** (Executing proxy `fetch()` sequences pulling internal mock EC2 configurations)
-   - **Command Injection** (Bypassing input sanitization)
-   - **IDOR** (Exposing sequential integer database referencing)
-3. **The Matrix "Visualizer"**: A complex, animated SVG ecosystem that visually plots the chronological transfer of your exploited data from the `Attacker` -> `WebApp` -> `Database` -> `Victim` in real-time.
-4. **Gamification Ecosystem**: Powered by `Zustand` and `LocalStorage` to track total attacks, XP generation, earned medals, and dynamically unlock ascending "Hacker Ranks".
-5. **Real-Time Multiplayer Combat**: A fully functional Node.js `socket.io` backend orchestrating live "Attacker vs Defender" match-making rooms!
+1.  **High-Fidelity Exploits**: Direct interaction with `Next.js API Routes` and a `Prisma + SQLite` backend. Simulate real SQL Injection (using `$queryRawUnsafe`) and cross-site scripting in a controlled sandbox.
+2.  **Attack Flow Visualizer**: A custom SVG engine that plots the chronological path of data transfers between Attacker, Application, Database, and Victim.
+3.  **Proctored Labs**: 8 comprehensive scenarios covering XSS, SQLi, CSRF, Broken Auth, File Upload, SSRF, Command Injection, and IDOR.
+4.  **Persistent Progress**: Track your evolution from "Script Kiddie" to "Zero Day King" with a persistent XP system and achievment badges.
+5.  **Multiplayer Combat**: Compete in live "Attacker vs Defender" rooms powered by a dedicated `Socket.io` orchestration layer.
 
----
+## 🚀 Setup & Installation
 
-## 🛠️ Tech Stack Integration
+ZeroDay Lab is built with **Next.js 15+** and **Tailwind CSS v4**.
 
-### Frontend
-- **Next.js 14** (App Router)
-- **React 19**
-- **Zustand** (Persistent State Store)
-- **Tailwind CSS v4** (Dark Aesthetic Design System)
-- **D3-Inspired SVG** (Attack Flow Timelines)
-- **Socket.io-client** (Real-Time UI sync)
-- **xterm.js** (Terminal emulation layer)
-
-### Backend ecosystem
-- **Next.js API Handler Boundary** (`app/api/labs/...`)
-- **Prisma ORM** (Database interfacing mapping mock vulnerabilities)
-- **Express + Socket.io Server** (Live orchestration on port 3001)
-
----
-
-## 🚀 Installation & Local Development
-
-This application operates out of a standard `src/` directory.
-
-### 1. Install Dependencies
+### 1. Bootstrap the Environment
 ```bash
 npm install
 ```
 
-### 2. Configure the Vulnerable Database
-Set up the Prisma engine and populate the database with susceptible targets.
+### 2. Initialize the Vulnerable Graph
+Prepare the Prisma engine and seed the vulnerable targets.
 ```bash
 npx prisma db push
-npx prisma generate
 npx tsx prisma/seed.ts
 ```
 
-### 3. Launch the Simulator
-We use `concurrently` to dynamically spin up both the primary UI/API Next.js server AND the backend WebSockets node server with a single command:
-
+### 3. Launch the Platform
+Start the integrated Next.js application and the Socket.io multiplayer server.
 ```bash
 npm run dev
 ```
 
-Navigate to **[http://localhost:3000](http://localhost:3000)** to enter the dashboard.
+Visit **[http://localhost:3000](http://localhost:3000)** to begin your training.
 
----
+## 🛠️ Technology Stack
+- **Framework**: Next.js 15+ (App Router, Turbopack)
+- **State Mgmt**: Zustand (with persistent ZeroDay migration logic)
+- **Database**: Prisma + SQLite
+- **Real-Time**: Socket.io (Multiplayer Orchestration)
+- **Styling**: Vanilla CSS + Tailwind v4
+- **Iconography**: Lucide React (Enterprise Set)
 
 ## ⚠️ Disclaimer
-This tool is strictly designed for educational purposes. It intentionally bypasses modern web framework security boundaries on its API endpoints (e.g., using RAW un-escaped concatenation for databases and accepting unsanitized POST structures) to recreate vulnerabilities safely within the SQLite isolated structure. **Never deploy these API patterns to a production application.**
+ZeroDay Lab is for **educational purposes only**. The API endpoints intentionally bypass modern security boundaries to demonstrate vulnerabilities. **Do not use these patterns in production.**

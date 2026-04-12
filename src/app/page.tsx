@@ -45,7 +45,7 @@ export default function Dashboard() {
 
   const [counter, setCounter] = useState({ attacks: 0, labs: 0, xp: 0 });
   const [threatIdx, setThreatIdx] = useState(0);
-  const [glitchText, setGlitchText] = useState('CYBERSEC LAB');
+  const [glitchText, setGlitchText] = useState('ZERODAY LAB');
 
   // Animate counters
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function Dashboard() {
   useEffect(() => {
     const chars = '!@#$%^&*<>?/\\|';
     let frame = 0;
-    const text = 'CYBERSEC LAB';
+    const text = 'ZERODAY LAB';
     const t = setInterval(() => {
       if (frame < 12) {
         const glitched = text.split('').map((c, i) =>
@@ -140,12 +140,17 @@ export default function Dashboard() {
                 Learn ethical hacking with real-time visualization and AI guidance.
               </p>
               <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-                <Link href="/labs/sqli">
-                  <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <Zap size={14} />
-                    Start Hacking
-                  </button>
-                </Link>
+                {(() => {
+                  const nextLab = LABS.find(lab => !completedLabs.some(c => c.labId === lab.id)) || LABS[0];
+                  return (
+                    <Link href={`/labs/${nextLab.slug}`}>
+                      <button className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <Zap size={14} />
+                        Start Hacking
+                      </button>
+                    </Link>
+                  );
+                })()}
                 <Link href="/profile">
                   <button className="btn-ghost" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                     <TrendingUp size={14} />
