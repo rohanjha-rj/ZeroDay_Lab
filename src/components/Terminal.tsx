@@ -15,10 +15,9 @@ interface TerminalProps {
 
 export default function CyberTerminal({ onClose }: TerminalProps) {
   const [lines, setLines] = useState<TerminalLine[]>([
-    { id: 0, type: 'info', content: '╔══════════════════════════════════════════╗' },
-    { id: 1, type: 'info', content: '║  CYBERSEC LAB TERMINAL  v1.0.0           ║' },
-    { id: 2, type: 'info', content: '║  Sandboxed Environment — Safe Mode ON    ║' },
-    { id: 3, type: 'info', content: '╚══════════════════════════════════════════╝' },
+    { id: 0, type: 'info', content: '>>> CyberSec Lab Terminal v1.0.0 init...' },
+    { id: 1, type: 'info', content: '>>> Security Environment: Isolated-Sandbox' },
+    { id: 2, type: 'info', content: '>>> System Status: Ready' },
     { id: 4, type: 'info', content: '' },
     { id: 5, type: 'info', content: 'Type "help" for available commands.' },
     { id: 6, type: 'info', content: '' },
@@ -92,11 +91,11 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
 
   const getLineColor = (type: TerminalLine['type']): string => {
     switch (type) {
-      case 'command': return '#00ff88';
-      case 'error': return '#ff3366';
-      case 'info': return '#4a9eff';
-      case 'output': return '#c8d3e0';
-      default: return '#c8d3e0';
+      case 'command': return '#10b981';
+      case 'error': return '#ef4444';
+      case 'info': return '#3b82f6';
+      case 'output': return '#9ca3af';
+      default: return '#9ca3af';
     }
   };
 
@@ -111,8 +110,8 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
         width: isMaximized ? '100%' : '100%',
         height: isMaximized ? '100vh' : 400,
         zIndex: isMaximized ? 1000 : undefined,
-        background: 'rgba(2, 6, 12, 0.98)',
-        border: '1px solid rgba(0,255,136,0.2)',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border-primary)',
         borderRadius: isMaximized ? 0 : 10,
         display: 'flex',
         flexDirection: 'column',
@@ -127,14 +126,14 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
           alignItems: 'center',
           gap: 8,
           padding: '8px 12px',
-          background: 'rgba(0,0,0,0.5)',
-          borderBottom: '1px solid rgba(0,255,136,0.1)',
+          background: 'rgba(0,0,0,0.3)',
+          borderBottom: '1px solid var(--border-primary)',
           flexShrink: 0,
         }}
       >
-        <TermIcon size={14} style={{ color: 'var(--neon-green)' }} />
-        <span style={{ flex: 1, fontSize: 12, color: 'var(--neon-green)', fontWeight: 600 }}>
-          cybersec-lab — bash
+        <TermIcon size={14} style={{ color: 'var(--text-muted)' }} />
+        <span style={{ flex: 1, fontSize: 11, color: 'var(--text-muted)', fontWeight: 500, letterSpacing: '0.05em' }}>
+          cybersec-lab / bin / bash
         </span>
         <div style={{ display: 'flex', gap: 6 }}>
           <button
@@ -146,7 +145,7 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
           {onClose && (
             <button
               onClick={onClose}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--neon-red)', padding: 2 }}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: 2 }}
             >
               <X size={13} />
             </button>
@@ -179,7 +178,7 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
           </div>
         ))}
         {isLoading && (
-          <div style={{ color: '#ffcc00', fontSize: 12 }}>
+          <div style={{ color: '#f59e0b', fontSize: 12 }}>
             ⠿ Processing...
           </div>
         )}
@@ -194,12 +193,12 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
           alignItems: 'center',
           gap: 8,
           padding: '8px 14px',
-          borderTop: '1px solid rgba(0,255,136,0.1)',
-          background: 'rgba(0,0,0,0.4)',
+          borderTop: '1px solid var(--border-primary)',
+          background: 'rgba(0,0,0,0.2)',
           flexShrink: 0,
         }}
       >
-        <span style={{ color: 'var(--neon-green)', fontSize: 12, flexShrink: 0 }}>
+        <span style={{ color: '#10b981', fontSize: 12, flexShrink: 0 }}>
           www-data@lab:~$
         </span>
         <input
@@ -214,17 +213,17 @@ export default function CyberTerminal({ onClose }: TerminalProps) {
             background: 'transparent',
             border: 'none',
             outline: 'none',
-            color: '#00ff88',
+            color: '#10b981',
             fontSize: 12,
             fontFamily: '"JetBrains Mono", monospace',
-            caretColor: '#00ff88',
+            caretColor: '#10b981',
           }}
           placeholder="Enter command..."
           disabled={isLoading}
         />
         <span
           className="cursor-blink"
-          style={{ width: 8, height: 14, background: '#00ff88', display: 'inline-block' }}
+          style={{ width: 8, height: 14, background: '#10b981', display: 'inline-block' }}
         />
       </form>
     </div>

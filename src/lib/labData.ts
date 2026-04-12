@@ -45,7 +45,7 @@ export const LABS: Lab[] = [
     difficulty: 'Beginner',
     severity: 'High',
     xpReward: 200,
-    icon: '🎭',
+    icon: 'Code',
     color: '#ffcc00',
     tags: ['XSS', 'DOM', 'Cookie Theft', 'Session Hijacking'],
     objectives: [
@@ -80,7 +80,7 @@ export const LABS: Lab[] = [
     difficulty: 'Beginner',
     severity: 'Critical',
     xpReward: 300,
-    icon: '💉',
+    icon: 'Database',
     color: '#ff3366',
     tags: ['SQLi', 'Auth Bypass', 'Data Exfiltration', 'UNION Attack'],
     objectives: [
@@ -115,7 +115,7 @@ export const LABS: Lab[] = [
     difficulty: 'Intermediate',
     severity: 'High',
     xpReward: 250,
-    icon: '🏦',
+    icon: 'GlobeLock',
     color: '#00d4ff',
     tags: ['CSRF', 'Token Bypass', 'Social Engineering', 'Banking'],
     objectives: [
@@ -147,7 +147,7 @@ export const LABS: Lab[] = [
     difficulty: 'Intermediate',
     severity: 'Critical',
     xpReward: 280,
-    icon: '🔓',
+    icon: 'KeyRound',
     color: '#a855f7',
     tags: ['Brute Force', 'Session Fixation', 'JWT Bypass', 'MFA Bypass'],
     objectives: [
@@ -180,7 +180,7 @@ export const LABS: Lab[] = [
     difficulty: 'Advanced',
     severity: 'Critical',
     xpReward: 350,
-    icon: '📁',
+    icon: 'UploadCloud',
     color: '#ff6600',
     tags: ['RCE', 'Webshell', 'MIME Bypass', 'Extension Bypass'],
     objectives: [
@@ -212,7 +212,7 @@ export const LABS: Lab[] = [
     difficulty: 'Advanced',
     severity: 'Critical',
     xpReward: 400,
-    icon: '🌐',
+    icon: 'Network',
     color: '#00ff88',
     tags: ['SSRF', 'Cloud Metadata', 'Internal Network', 'AWS'],
     objectives: [
@@ -244,7 +244,7 @@ export const LABS: Lab[] = [
     difficulty: 'Advanced',
     severity: 'Critical',
     xpReward: 380,
-    icon: '💻',
+    icon: 'TerminalSquare',
     color: '#ff3366',
     tags: ['RCE', 'Shell Injection', 'Reverse Shell', 'Privilege Escalation'],
     objectives: [
@@ -276,7 +276,7 @@ export const LABS: Lab[] = [
     difficulty: 'Intermediate',
     severity: 'High',
     xpReward: 230,
-    icon: '👤',
+    icon: 'UserX',
     color: '#a855f7',
     tags: ['IDOR', 'Access Control', 'Data Leakage', 'API Abuse'],
     objectives: [
@@ -301,22 +301,22 @@ export const LABS: Lab[] = [
 ];
 
 export const RANKS = [
-  { name: 'Script Kiddie', minXP: 0, maxXP: 299, color: '#94a3b8', icon: '🐣' },
-  { name: 'Novice Hacker', minXP: 300, maxXP: 699, color: '#00d4ff', icon: '🎯' },
-  { name: 'Penetration Tester', minXP: 700, maxXP: 1299, color: '#00ff88', icon: '🔍' },
-  { name: 'Red Teamer', minXP: 1300, maxXP: 2199, color: '#ffcc00', icon: '⚔️' },
-  { name: 'Bug Hunter', minXP: 2200, maxXP: 3499, color: '#ff6600', icon: '🐛' },
-  { name: 'Elite Hacker', minXP: 3500, maxXP: 5999, color: '#a855f7', icon: '💀' },
-  { name: 'Zero Day King', minXP: 6000, maxXP: Infinity, color: '#ff3366', icon: '👑' },
+  { name: 'Script Kiddie', minXP: 0, maxXP: 299, color: '#94a3b8', icon: 'User' },
+  { name: 'Novice Hacker', minXP: 300, maxXP: 699, color: '#6366f1', icon: 'Target' },
+  { name: 'Penetration Tester', minXP: 700, maxXP: 1299, color: '#10b981', icon: 'Search' },
+  { name: 'Red Teamer', minXP: 1300, maxXP: 2199, color: '#f59e0b', icon: 'Swords' },
+  { name: 'Bug Hunter', minXP: 2200, maxXP: 3499, color: '#f97316', icon: 'Bug' },
+  { name: 'Elite Hacker', minXP: 3500, maxXP: 5999, color: '#a855f7', icon: 'Skull' },
+  { name: 'Zero Day King', minXP: 6000, maxXP: Infinity, color: '#ef4444', icon: 'Crown' },
 ];
 
 export const BADGES = [
-  { id: 'first-blood', name: 'First Blood', description: 'Complete your first attack', icon: '🩸', xp: 50 },
-  { id: 'xss-lord', name: 'XSS Lord', description: 'Complete all XSS challenges', icon: '🎭', xp: 100 },
-  { id: 'sqli-master', name: 'SQLi Master', description: 'Dump the entire database', icon: '💉', xp: 150 },
-  { id: 'session-thief', name: 'Session Thief', description: 'Steal an admin cookie', icon: '🍪', xp: 75 },
-  { id: 'rce-god', name: 'RCE God', description: 'Execute a reverse shell', icon: '🔥', xp: 200 },
-  { id: 'web-ninja', name: 'Web Ninja', description: 'Complete 5 labs', icon: '🥷', xp: 250 },
-  { id: 'speed-runner', name: 'Speed Runner', description: 'Complete a lab in under 2 minutes', icon: '⚡', xp: 100 },
-  { id: 'no-hints', name: 'Self-Taught', description: 'Complete a lab without hints', icon: '🧠', xp: 150 },
+  { id: 'first-blood', name: 'First Blood', description: 'Complete your first attack', icon: 'Droplet', xp: 50 },
+  { id: 'xss-lord', name: 'XSS Lord', description: 'Complete all XSS challenges', icon: 'Code', xp: 100 },
+  { id: 'sqli-master', name: 'SQLi Master', description: 'Dump the entire database', icon: 'Database', xp: 150 },
+  { id: 'session-thief', name: 'Session Thief', description: 'Steal an admin cookie', icon: 'LockKeyhole', xp: 75 },
+  { id: 'rce-god', name: 'RCE God', description: 'Execute a reverse shell', icon: 'Terminal', xp: 200 },
+  { id: 'web-ninja', name: 'Web Ninja', description: 'Complete 5 labs', icon: 'VenetianMask', xp: 250 },
+  { id: 'speed-runner', name: 'Speed Runner', description: 'Complete a lab in under 2 minutes', icon: 'Zap', xp: 100 },
+  { id: 'no-hints', name: 'Self-Taught', description: 'Complete a lab without hints', icon: 'Brain', xp: 150 },
 ];

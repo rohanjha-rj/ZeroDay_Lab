@@ -11,6 +11,7 @@ import {
   Eye, EyeOff, Terminal as TermIcon, Bot, BarChart3, Target,
   RotateCcw
 } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 interface LabLayoutProps {
   labSlug: string;
@@ -135,7 +136,12 @@ export default function LabLayout({ labSlug, targetApp, simulate, extraInput }: 
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div style={{ fontSize: 36 }}>{lab.icon}</div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            {(() => {
+              const LabIcon = (LucideIcons as any)[lab.icon] || LucideIcons.Code;
+              return <LabIcon size={36} color={lab.color} />;
+            })()}
+          </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
               <h1 style={{ fontSize: 20, fontWeight: 800, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono' }}>

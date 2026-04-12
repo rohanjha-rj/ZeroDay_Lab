@@ -15,7 +15,7 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
     {
       id: '0',
       role: 'mentor',
-      content: `**Hello, Hacker!** 🤖\n\nI'm your AI Security Mentor. I'll guide you through the **${labSlug.toUpperCase().replace('-', ' ')}** lab.\n\nAsk me anything! Try:\n- "help" or "hint"\n- "explain [concept]"\n- "explain my attack" (after an attack)`,
+      content: `**Hello, Hacker!**\n\nI'm your AI Security Mentor. I'll guide you through the **${labSlug.toUpperCase().replace('-', ' ')}** lab.\n\nAsk me anything! Try:\n- "help" or "hint"\n- "explain [concept]"\n- "explain my attack" (after an attack)`,
       timestamp: Date.now(),
       type: 'hint',
     },
@@ -127,8 +127,8 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
         display: 'flex',
         flexDirection: 'column',
         height: '100%',
-        background: 'rgba(5, 10, 20, 0.95)',
-        border: '1px solid rgba(168,85,247,0.2)',
+        background: 'var(--bg-card)',
+        border: '1px solid var(--border-primary)',
         borderRadius: 12,
         overflow: 'hidden',
         fontFamily: 'Inter, sans-serif',
@@ -138,8 +138,8 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
       <div
         style={{
           padding: '12px 16px',
-          background: 'linear-gradient(135deg, rgba(168,85,247,0.15), rgba(99,102,241,0.1))',
-          borderBottom: '1px solid rgba(168,85,247,0.2)',
+          background: 'rgba(255,255,255,0.02)',
+          borderBottom: '1px solid var(--border-primary)',
           display: 'flex',
           alignItems: 'center',
           gap: 10,
@@ -151,16 +151,16 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
             width: 32,
             height: 32,
             borderRadius: 8,
-            background: 'linear-gradient(135deg, #a855f7, #6366f1)',
+            background: 'var(--bg-secondary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <Bot size={18} color="#fff" />
+          <Bot size={18} color="var(--text-secondary)" />
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 13, fontWeight: 700, color: '#a855f7' }}>AI Security Mentor</div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)' }}>AI Security Mentor</div>
           <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>
             {labSlug.toUpperCase()} · {difficulty}
           </div>
@@ -172,9 +172,9 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
           onChange={(e) => setDifficulty(e.target.value as Difficulty)}
           style={{
             background: 'rgba(0,0,0,0.4)',
-            border: '1px solid rgba(168,85,247,0.3)',
+            border: '1px solid var(--border-primary)',
             borderRadius: 6,
-            color: '#a855f7',
+            color: 'var(--text-muted)',
             fontSize: 11,
             padding: '3px 8px',
             fontFamily: 'JetBrains Mono',
@@ -211,9 +211,9 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
             style={{
               padding: '3px 10px',
               borderRadius: 20,
-              background: 'rgba(168,85,247,0.08)',
-              border: '1px solid rgba(168,85,247,0.2)',
-              color: '#a855f7',
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid var(--border-primary)',
+              color: 'var(--text-secondary)',
               fontSize: 11,
               cursor: 'pointer',
               fontFamily: 'JetBrains Mono',
@@ -243,7 +243,7 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
                   width: 28,
                   height: 28,
                   borderRadius: 8,
-                  background: 'linear-gradient(135deg, #a855f7, #6366f1)',
+                  background: 'var(--bg-secondary)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -251,14 +251,14 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
                   marginTop: 2,
                 }}
               >
-                <Bot size={14} color="#fff" />
+                <Bot size={14} color="var(--text-secondary)" />
               </div>
             )}
             <div
               style={{
                 maxWidth: '80%',
-                background: msg.role === 'user' ? 'rgba(0,212,255,0.1)' : 'rgba(168,85,247,0.08)',
-                border: `1px solid ${msg.role === 'user' ? 'rgba(0,212,255,0.2)' : 'rgba(168,85,247,0.15)'}`,
+                background: msg.role === 'user' ? 'rgba(59,130,246,0.1)' : 'rgba(255,255,255,0.03)',
+                border: `1px solid ${msg.role === 'user' ? 'rgba(59,130,246,0.2)' : 'var(--border-primary)'}`,
                 borderRadius: msg.role === 'user' ? '12px 4px 12px 12px' : '4px 12px 12px 12px',
                 padding: '9px 12px',
                 fontSize: 12.5,
@@ -278,13 +278,13 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
                 width: 28,
                 height: 28,
                 borderRadius: 8,
-                background: 'linear-gradient(135deg, #a855f7, #6366f1)',
+                background: 'var(--bg-secondary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}
             >
-              <Bot size={14} color="#fff" />
+              <Bot size={14} color="var(--text-secondary)" />
             </div>
             <div
               style={{
@@ -304,7 +304,7 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
                     width: 6,
                     height: 6,
                     borderRadius: '50%',
-                    background: '#a855f7',
+                    background: 'var(--text-muted)',
                     animation: `bounce 1.2s ${i * 0.2}s infinite`,
                   }}
                 />
@@ -333,7 +333,7 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
           style={{
             flex: 1,
             background: 'rgba(0,0,0,0.4)',
-            border: '1px solid rgba(168,85,247,0.2)',
+            border: '1px solid var(--border-primary)',
             borderRadius: 8,
             color: 'var(--text-primary)',
             fontSize: 12,
@@ -345,8 +345,8 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
         <button
           type="submit"
           style={{
-            background: 'linear-gradient(135deg, #a855f7, #6366f1)',
-            border: 'none',
+            background: 'var(--bg-secondary)',
+            border: '1px solid var(--border-primary)',
             borderRadius: 8,
             padding: '8px 12px',
             cursor: 'pointer',
@@ -354,7 +354,7 @@ export default function AIMentor({ labSlug, lastPayload, lastOutcome, onClose }:
             alignItems: 'center',
           }}
         >
-          <Send size={14} color="#fff" />
+          <Send size={14} color="var(--text-secondary)" />
         </button>
       </form>
 

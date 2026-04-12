@@ -1,7 +1,8 @@
 'use client';
 import { useProgressStore } from '@/lib/progressStore';
 import { LABS, BADGES, RANKS } from '@/lib/labData';
-import { Zap, Shield, Target, Clock, Lightbulb, Trophy } from 'lucide-react';
+import { Zap, Shield, Target, Clock, Lightbulb, Trophy, FlaskConical, Swords } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 export default function ProfilePage() {
   const { xp, completedLabs, earnedBadges, totalAttacks, hintsUsed, getRank, getProgressPercent, getXPToNextRank } = useProgressStore();
@@ -37,7 +38,12 @@ export default function ProfilePage() {
               borderColor: `${rank.color}30`,
             }}
           >
-            <div style={{ fontSize: 56, marginBottom: 12 }}>{rank.icon}</div>
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 12 }}>
+              {(() => {
+                const RankIcon = (LucideIcons as any)[rank.icon] || LucideIcons.User;
+                return <RankIcon size={56} color={rank.color} />;
+              })()}
+            </div>
             <div style={{ fontSize: 18, fontWeight: 800, color: rank.color, fontFamily: 'JetBrains Mono', marginBottom: 4 }}>
               {rank.name}
             </div>
@@ -49,24 +55,31 @@ export default function ProfilePage() {
               <div className="xp-bar-fill" style={{ width: `${progress}%` }} />
             </div>
             {nextRank && (
-              <div style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>
-                {xpToNext} XP → {nextRank.icon} {nextRank.name}
-              </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>
+                  {xpToNext} XP → 
+                  {(() => {
+                    const NextIcon = (LucideIcons as any)[nextRank.icon] || LucideIcons.User;
+                    return <NextIcon size={12} color={nextRank.color} />;
+                  })()}
+                  {nextRank.name}
+                </div>
             )}
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 20 }}>
               {[
-                { label: 'Labs Done', value: completedLabs.length, icon: '🧪' },
-                { label: 'Attacks', value: totalAttacks, icon: '⚔️' },
-                { label: 'Badges', value: earnedBadges.length, icon: '🏆' },
-                { label: 'Hints Used', value: hintsUsed, icon: '💡' },
-              ].map((s) => (
+                { label: 'Labs Done', value: completedLabs.length, icon: FlaskConical },
+                { label: 'Attacks', value: totalAttacks, icon: Swords },
+                { label: 'Badges', value: earnedBadges.length, icon: Trophy },
+                { label: 'Hints Used', value: hintsUsed, icon: Lightbulb },
+              ].map((s) => {
+                const StatIcon = s.icon;
+                return (
                 <div key={s.label} style={{ padding: 10, background: 'rgba(0,0,0,0.3)', borderRadius: 8, border: '1px solid rgba(255,255,255,0.05)' }}>
-                  <div style={{ fontSize: 18 }}>{s.icon}</div>
+                  <div style={{ marginBottom: 6 }}><StatIcon size={18} color="var(--text-secondary)" /></div>
                   <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono' }}>{s.value}</div>
                   <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>{s.label}</div>
                 </div>
-              ))}
+              )})}
             </div>
           </div>
 
@@ -79,7 +92,12 @@ export default function ProfilePage() {
                 const isPast = xp >= r.minXP && !isCurrentRank;
                 return (
                   <div key={r.name} style={{ display: 'flex', alignItems: 'center', gap: 8, opacity: isPast || isCurrentRank ? 1 : 0.4 }}>
-                    <span style={{ fontSize: 16, flexShrink: 0 }}>{r.icon}</span>
+                    <span style={{ flexShrink: 0 }}>
+                      {(() => {
+                        const RIcon = (LucideIcons as any)[r.icon] || LucideIcons.User;
+                        return <RIcon size={18} color={isCurrentRank ? r.color : 'var(--text-secondary)'} />;
+                      })()}
+                    </span>
                     <div style={{ flex: 1 }}>
                       <div style={{ fontSize: 11, color: isCurrentRank ? r.color : 'var(--text-secondary)', fontWeight: isCurrentRank ? 700 : 400 }}>
                         {r.name}
@@ -144,7 +162,12 @@ export default function ProfilePage() {
                       transition: 'all 0.3s',
                     }}
                   >
-                    <div style={{ fontSize: 24, marginBottom: 6 }}>{badge.icon}</div>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 6 }}>
+                      {(() => {
+                        const BIcon = (LucideIcons as any)[badge.icon] || LucideIcons.Award;
+                        return <BIcon size={24} color={earned ? 'var(--neon-green)' : 'var(--text-muted)'} />;
+                      })()}
+                    </div>
                     <div style={{ fontSize: 10, fontWeight: 700, color: earned ? 'var(--neon-green)' : 'var(--text-muted)', fontFamily: 'JetBrains Mono', marginBottom: 2 }}>
                       {badge.name}
                     </div>
@@ -174,7 +197,12 @@ export default function ProfilePage() {
                   if (!lab) return null;
                   return (
                     <div key={cl.labId} style={{ padding: '10px 14px', background: 'rgba(0,0,0,0.3)', border: '1px solid rgba(0,255,136,0.15)', borderRadius: 8, display: 'flex', alignItems: 'center', gap: 12 }}>
-                      <span style={{ fontSize: 22 }}>{lab.icon}</span>
+                      <span style={{ display: 'flex', alignItems: 'center', paddingRight: 10 }}>
+                        {(() => {
+                          const LIcon = (LucideIcons as any)[lab.icon] || LucideIcons.Code;
+                          return <LIcon size={24} color={lab.color} />;
+                        })()}
+                      </span>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-primary)' }}>{lab.title}</div>
                         <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>

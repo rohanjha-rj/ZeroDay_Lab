@@ -1,5 +1,6 @@
 'use client';
 import { Bell, Search, Wifi, ShieldAlert, Cpu } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { useProgressStore } from '@/lib/progressStore';
 import { useEffect, useState } from 'react';
 
@@ -125,7 +126,12 @@ export default function Navbar() {
             gap: 10,
           }}
         >
-          <span style={{ fontSize: 18 }}>{rank.icon}</span>
+          <span style={{ display: 'flex', alignItems: 'center' }}>
+            {(() => {
+              const Icon = (LucideIcons as any)[rank.icon] || LucideIcons.User;
+              return <Icon size={18} color={rank.color} />;
+            })()}
+          </span>
           <div>
             <div style={{ fontSize: 10, color: rank.color, fontFamily: 'JetBrains Mono', fontWeight: 700 }}>
               {rank.name}

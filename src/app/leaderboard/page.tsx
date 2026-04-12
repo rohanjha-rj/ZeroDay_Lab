@@ -1,20 +1,21 @@
 'use client';
 import { useState } from 'react';
-import { Trophy, Zap, Shield, Target } from 'lucide-react';
+import { Trophy, Zap, Shield, Target, Award, Crown, Star } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { RANKS } from '@/lib/labData';
 import { useProgressStore } from '@/lib/progressStore';
 
 const FAKE_PLAYERS = [
-  { rank: 1, name: 'n0p_sl33p', xp: 18450, icon: '👑', rankName: 'Zero Day King', completedLabs: 8, country: '🇷🇺' },
-  { rank: 2, name: 'h4ck3r_pr1m3', xp: 14200, icon: '💀', rankName: 'Elite Hacker', completedLabs: 8, country: '🇺🇸' },
-  { rank: 3, name: 'xss_master69', xp: 11800, icon: '💀', rankName: 'Elite Hacker', completedLabs: 7, country: '🇩🇪' },
-  { rank: 4, name: 'sqli_king', xp: 9600, icon: '🐛', rankName: 'Bug Hunter', completedLabs: 7, country: '🇨🇳' },
-  { rank: 5, name: 'b4d_p0w3r', xp: 8100, icon: '🐛', rankName: 'Bug Hunter', completedLabs: 6, country: '🇧🇷' },
-  { rank: 6, name: 'nullp0int3r', xp: 6900, icon: '🐛', rankName: 'Bug Hunter', completedLabs: 6, country: '🇮🇳' },
-  { rank: 7, name: 'recon_l0rd', xp: 5200, icon: '⚔️', rankName: 'Red Teamer', completedLabs: 5, country: '🇬🇧' },
-  { rank: 8, name: 'pent3st3r', xp: 4100, icon: '⚔️', rankName: 'Red Teamer', completedLabs: 5, country: '🇫🇷' },
-  { rank: 9, name: 'ch4os_age_nt', xp: 2800, icon: '🔍', rankName: 'Pentest', completedLabs: 4, country: '🇯🇵' },
-  { rank: 10, name: 'an0nym_0us', xp: 1400, icon: '🎯', rankName: 'Novice Hacker', completedLabs: 3, country: '🇰🇷' },
+  { rank: 1, name: 'n0p_sl33p', xp: 18450, icon: 'Shield', rankName: 'Zero Day King', completedLabs: 8, country: 'US' },
+  { rank: 2, name: 'h4ck3r_pr1m3', xp: 14200, icon: 'Terminal', rankName: 'Elite Hacker', completedLabs: 8, country: 'GE' },
+  { rank: 3, name: 'xss_master69', xp: 11800, icon: 'Terminal', rankName: 'Elite Hacker', completedLabs: 7, country: 'RU' },
+  { rank: 4, name: 'sqli_king', xp: 9600, icon: 'Bug', rankName: 'Bug Hunter', completedLabs: 7, country: 'CN' },
+  { rank: 5, name: 'b4d_p0w3r', xp: 8100, icon: 'Bug', rankName: 'Bug Hunter', completedLabs: 6, country: 'BR' },
+  { rank: 6, name: 'nullp0int3r', xp: 6900, icon: 'Bug', rankName: 'Bug Hunter', completedLabs: 6, country: 'IN' },
+  { rank: 7, name: 'recon_l0rd', xp: 5200, icon: 'Swords', rankName: 'Red Teamer', completedLabs: 5, country: 'UK' },
+  { rank: 8, name: 'pent3st3r', xp: 4100, icon: 'Swords', rankName: 'Red Teamer', completedLabs: 5, country: 'FR' },
+  { rank: 9, name: 'ch4os_age_nt', xp: 2800, icon: 'Search', rankName: 'Pentest', completedLabs: 4, country: 'JP' },
+  { rank: 10, name: 'an0nym_0us', xp: 1400, icon: 'Target', rankName: 'Novice Hacker', completedLabs: 3, country: 'KR' },
 ];
 
 const CHALLENGES = [
@@ -29,7 +30,7 @@ export default function LeaderboardPage() {
 
   const allPlayers = [...FAKE_PLAYERS, {
     rank: 0, name: 'YOU', xp, icon: rank.icon,
-    rankName: rank.name, completedLabs: completedLabs.length, country: '⭐',
+    rankName: rank.name, completedLabs: completedLabs.length, country: 'SYS',
   }].sort((a, b) => b.xp - a.xp).map((p, i) => ({ ...p, rank: i + 1 }));
 
   const myRank = allPlayers.findIndex((p) => p.name === 'YOU') + 1;
@@ -60,17 +61,21 @@ export default function LeaderboardPage() {
               return (
                 <div key={p.name} style={{ textAlign: 'center', position: 'relative' }}>
                   {pos === 1 && (
-                    <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)', fontSize: 24 }}>👑</div>
+                    <div style={{ position: 'absolute', top: -16, left: '50%', transform: 'translateX(-50%)' }}>
+                      <Crown size={24} color="#f59e0b" />
+                    </div>
                   )}
-                  <div style={{
-                    width: sizes[i], height: sizes[i], borderRadius: '50%', margin: '16px auto 10px',
-                    background: `radial-gradient(circle, ${colors[i]}33, ${colors[i]}11)`,
-                    border: `2px solid ${colors[i]}66`,
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: i === 1 ? 40 : 32,
-                  }}>
-                    {p.icon}
-                  </div>
+                    <div style={{
+                      width: sizes[i], height: sizes[i], borderRadius: '50%', margin: '16px auto 10px',
+                      background: `rgba(255,255,255,0.03)`,
+                      border: `1px solid ${colors[i]}33`,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}>
+                      {(() => {
+                        const Icon = (LucideIcons as any)[p.icon] || Award;
+                        return <Icon size={i === 1 ? 40 : 32} color={colors[i]} />;
+                      })()}
+                    </div>
                   <div style={{ fontFamily: 'JetBrains Mono', color: colors[i], fontWeight: 700, fontSize: i === 1 ? 15 : 13 }}>
                     #{pos} {p.name}
                   </div>
@@ -105,13 +110,15 @@ export default function LeaderboardPage() {
                       }}
                     >
                       <td style={{ padding: '10px 14px', fontFamily: 'JetBrains Mono', fontSize: 13 }}>
-                        <span style={{ color: player.rank === 1 ? '#ffcc00' : player.rank === 2 ? '#94a3b8' : player.rank === 3 ? '#ff6600' : 'var(--text-muted)' }}>
-                          {player.rank <= 3 ? ['🥇', '🥈', '🥉'][player.rank - 1] : `#${player.rank}`}
-                        </span>
+                      <span style={{ color: player.rank === 1 ? '#f59e0b' : player.rank === 2 ? '#94a3b8' : player.rank === 3 ? '#f97316' : 'var(--text-muted)', fontSize: 13, fontWeight: 700 }}>
+                        #{player.rank}
+                      </span>
                       </td>
                       <td style={{ padding: '10px 14px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <span>{player.country}</span>
+                          <span style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono', padding: '1px 4px', border: '1px solid var(--border-primary)', borderRadius: 3 }}>
+                            {player.country}
+                          </span>
                           <span style={{ fontFamily: 'JetBrains Mono', fontSize: 13, color: isMe ? 'var(--neon-green)' : 'var(--text-primary)', fontWeight: isMe ? 700 : 400 }}>
                             {player.name}
                             {isMe && <span style={{ marginLeft: 6, fontSize: 9, padding: '1px 6px', borderRadius: 10, background: 'rgba(0,255,136,0.15)', color: 'var(--neon-green)' }}>YOU</span>}
@@ -119,13 +126,19 @@ export default function LeaderboardPage() {
                         </div>
                       </td>
                       <td style={{ padding: '10px 14px' }}>
-                        <span style={{ fontSize: 11, color: 'var(--text-secondary)' }}>{player.icon} {player.rankName}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 6, fontSize: 11, color: 'var(--text-secondary)' }}>
+                           {(() => {
+                             const Icon = (LucideIcons as any)[player.icon] || Award;
+                             return <Icon size={12} color="var(--text-muted)" />;
+                           })()}
+                           {player.rankName}
+                        </div>
                       </td>
                       <td style={{ padding: '10px 14px', fontFamily: 'JetBrains Mono', fontSize: 12, color: 'var(--neon-cyan)' }}>
                         {player.completedLabs}/8
                       </td>
                       <td style={{ padding: '10px 14px', fontFamily: 'JetBrains Mono', fontWeight: 700, color: isMe ? 'var(--neon-green)' : 'var(--text-primary)' }}>
-                        {player.xp.toLocaleString()}
+                        {player.xp.toLocaleString()} XP
                       </td>
                     </tr>
                   );
@@ -145,8 +158,12 @@ export default function LeaderboardPage() {
             <div style={{ fontSize: 36, fontWeight: 900, color: 'var(--neon-green)', fontFamily: 'JetBrains Mono', textAlign: 'center' }}>
               #{myRank}
             </div>
-            <div style={{ textAlign: 'center', fontSize: 13, color: rank.color, fontFamily: 'JetBrains Mono', marginTop: 4 }}>
-              {rank.icon} {rank.name}
+            <div style={{ textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6, fontSize: 13, color: rank.color, fontFamily: 'JetBrains Mono', marginTop: 4 }}>
+              {(() => {
+                const Icon = (LucideIcons as any)[rank.icon] || Award;
+                return <Icon size={14} color={rank.color} />;
+              })()}
+              {rank.name}
             </div>
             <div style={{ textAlign: 'center', fontSize: 20, fontWeight: 700, color: 'var(--neon-green)', fontFamily: 'JetBrains Mono', marginTop: 8 }}>
               {xp.toLocaleString()} XP

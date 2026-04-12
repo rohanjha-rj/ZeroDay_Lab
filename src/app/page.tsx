@@ -6,14 +6,15 @@ import { useProgressStore } from '@/lib/progressStore';
 import {
   Shield, Zap, Target, Award, TrendingUp,
   Clock, ChevronRight, Activity, Lock, Globe,
-  Database, Code2, Upload, Server, Terminal, UserX
+  Code2, Upload, Server, Terminal, UserX, Database
 } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 
 const SEVERITY_COLOR: Record<string, string> = {
-  Critical: '#ff3366',
-  High: '#ff6600',
-  Medium: '#ffcc00',
-  Low: '#00d4ff',
+  Critical: '#ef4444',
+  High: '#f97316',
+  Medium: '#f59e0b',
+  Low: '#3b82f6',
 };
 
 const CATEGORY_ICONS: Record<string, React.ElementType> = {
@@ -100,8 +101,8 @@ export default function Dashboard() {
         style={{
           marginBottom: 28,
           padding: 32,
-          background: 'linear-gradient(135deg, rgba(0,255,136,0.05) 0%, rgba(0,212,255,0.05) 50%, rgba(168,85,247,0.05) 100%)',
-          border: '1px solid rgba(0,255,136,0.1)',
+          background: 'linear-gradient(135deg, rgba(16,185,129,0.03) 0%, rgba(59,130,246,0.03) 100%)',
+          border: '1px solid var(--border-primary)',
           borderRadius: 16,
           position: 'relative',
           overflow: 'hidden',
@@ -110,7 +111,7 @@ export default function Dashboard() {
         {/* BG pattern */}
         <div style={{
           position: 'absolute', inset: 0,
-          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(0,255,136,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(0,212,255,0.08) 0%, transparent 40%)',
+          backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(16,185,129,0.03) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(59,130,246,0.03) 0%, transparent 40%)',
           pointerEvents: 'none',
         }} />
 
@@ -124,7 +125,7 @@ export default function Dashboard() {
                     fontSize: 32,
                     fontWeight: 900,
                     fontFamily: 'JetBrains Mono',
-                    background: 'linear-gradient(135deg, #00ff88, #00d4ff)',
+                    background: 'linear-gradient(135deg, var(--neon-green), var(--neon-cyan))',
                     WebkitBackgroundClip: 'text',
                     WebkitTextFillColor: 'transparent',
                     letterSpacing: '-0.02em',
@@ -165,7 +166,12 @@ export default function Dashboard() {
                 textAlign: 'center',
               }}
             >
-              <div style={{ fontSize: 40, marginBottom: 4 }}>{rank.icon}</div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
+                {(() => {
+                  const RankIcon = (LucideIcons as any)[rank.icon] || LucideIcons.User;
+                  return <RankIcon size={40} color={rank.color} />;
+                })()}
+              </div>
               <div style={{ fontSize: 14, fontWeight: 700, color: rank.color, fontFamily: 'JetBrains Mono' }}>
                 {rank.name}
               </div>
@@ -188,10 +194,10 @@ export default function Dashboard() {
       {/* Stats Row */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 28 }}>
         {[
-          { label: 'Global Attacks', value: counter.attacks.toLocaleString(), icon: Activity, color: '#ff3366', sub: 'simulated today' },
-          { label: 'Labs Available', value: `${counter.labs}`, icon: Target, color: '#00d4ff', sub: 'attack scenarios' },
-          { label: 'Your XP', value: counter.xp.toLocaleString(), icon: Zap, color: '#00ff88', sub: `${completedLabs.length} labs done` },
-          { label: 'Badges Earned', value: `${earnedBadges.length}/${BADGES.length}`, icon: Award, color: '#a855f7', sub: 'achievements' },
+          { label: 'Global Attacks', value: counter.attacks.toLocaleString(), icon: Activity, color: '#ef4444', sub: 'simulated today' },
+          { label: 'Labs Available', value: `${counter.labs}`, icon: Target, color: '#3b82f6', sub: 'attack scenarios' },
+          { label: 'Your XP', value: counter.xp.toLocaleString(), icon: Zap, color: '#10b981', sub: `${completedLabs.length} labs done` },
+          { label: 'Badges Earned', value: `${earnedBadges.length}/${BADGES.length}`, icon: Award, color: '#8b5cf6', sub: 'achievements' },
         ].map((stat) => {
           const Icon = stat.icon;
           return (
@@ -233,7 +239,7 @@ export default function Dashboard() {
                     style={{
                       padding: 16,
                       cursor: 'pointer',
-                      borderColor: isCompleted ? 'rgba(0,255,136,0.3)' : undefined,
+                      borderColor: isCompleted ? 'rgba(16,185,129,0.3)' : undefined,
                       position: 'relative',
                       overflow: 'hidden',
                     }}
@@ -241,8 +247,8 @@ export default function Dashboard() {
                     {isCompleted && (
                       <div style={{
                         position: 'absolute', top: 8, right: 8,
-                        background: 'rgba(0,255,136,0.15)',
-                        border: '1px solid rgba(0,255,136,0.3)',
+                        background: 'rgba(16,185,129,0.1)',
+                        border: '1px solid rgba(16,185,129,0.2)',
                         borderRadius: 20,
                         padding: '1px 8px',
                         fontSize: 9,
@@ -263,7 +269,10 @@ export default function Dashboard() {
                         justifyContent: 'center',
                         fontSize: 18,
                       }}>
-                        {lab.icon}
+                        {(() => {
+                          const LabIcon = (LucideIcons as any)[lab.icon] || Code2;
+                          return <LabIcon size={20} color={lab.color} />;
+                        })()}
                       </div>
                       <div>
                         <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)' }}>{lab.title}</div>
@@ -318,8 +327,8 @@ export default function Dashboard() {
                   style={{
                     padding: '8px 10px',
                     borderRadius: 6,
-                    background: i === threatIdx ? 'rgba(255,51,102,0.08)' : 'rgba(0,0,0,0.2)',
-                    border: `1px solid ${i === threatIdx ? 'rgba(255,51,102,0.2)' : 'rgba(255,255,255,0.04)'}`,
+                    background: i === threatIdx ? 'rgba(239,68,68,0.08)' : 'rgba(255,255,255,0.05)',
+                    border: `1px solid ${i === threatIdx ? 'rgba(239,68,68,0.2)' : 'rgba(255,255,255,0.05)'}`,
                     transition: 'all 0.3s ease',
                   }}
                 >
@@ -358,14 +367,19 @@ export default function Dashboard() {
                       textAlign: 'center',
                       padding: '8px 4px',
                       borderRadius: 8,
-                      background: earned ? 'rgba(0,255,136,0.08)' : 'rgba(0,0,0,0.3)',
-                      border: `1px solid ${earned ? 'rgba(0,255,136,0.2)' : 'rgba(255,255,255,0.04)'}`,
+                      background: earned ? 'rgba(16,185,129,0.08)' : 'rgba(255,255,255,0.04)',
+                      border: `1px solid ${earned ? 'rgba(16,185,129,0.2)' : 'rgba(255,255,255,0.04)'}`,
                       filter: earned ? 'none' : 'grayscale(1) opacity(0.3)',
                       transition: 'all 0.3s',
                       cursor: 'help',
                     }}
                   >
-                    <div style={{ fontSize: 20, marginBottom: 2 }}>{badge.icon}</div>
+                    <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 2 }}>
+                      {(() => {
+                        const BadgeIcon = (LucideIcons as any)[badge.icon] || LucideIcons.Award;
+                        return <BadgeIcon size={20} color={earned ? 'var(--neon-green)' : 'var(--text-muted)'} />;
+                      })()}
+                    </div>
                     <div style={{ fontSize: 8, color: earned ? 'var(--neon-green)' : 'var(--text-muted)', fontFamily: 'JetBrains Mono', lineHeight: 1.2 }}>
                       {badge.name}
                     </div>
@@ -379,12 +393,12 @@ export default function Dashboard() {
           <div
             style={{
               padding: 14,
-              background: 'linear-gradient(135deg, rgba(168,85,247,0.1), rgba(99,102,241,0.05))',
-              border: '1px solid rgba(168,85,247,0.2)',
+              background: 'linear-gradient(135deg, rgba(139,92,246,0.1), rgba(99,102,241,0.05))',
+              border: '1px solid rgba(139,92,246,0.2)',
               borderRadius: 10,
             }}
           >
-            <div style={{ fontSize: 11, fontWeight: 700, color: '#a855f7', marginBottom: 6, fontFamily: 'JetBrains Mono' }}>
+            <div style={{ fontSize: 11, fontWeight: 700, color: 'var(--text-muted)', marginBottom: 6, fontFamily: 'JetBrains Mono' }}>
               💡 MENTOR TIP
             </div>
             <div style={{ fontSize: 12, color: 'var(--text-secondary)', lineHeight: 1.6 }}>

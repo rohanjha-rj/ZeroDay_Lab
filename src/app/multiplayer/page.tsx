@@ -73,7 +73,7 @@ export default function MultiplayerPage() {
           <div className="glass-card" style={{ padding: 18 }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
               <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono' }}>
-                🔴 Live Combat Rooms
+                Live Combat Rooms
               </div>
               <button className="btn-primary" onClick={createRoom} style={{ padding: '6px 16px', fontSize: 12 }}>
                 + Create Room
@@ -97,7 +97,7 @@ export default function MultiplayerPage() {
                     </div>
                   </div>
                   {!room.attacker && (
-                    <button className="btn-primary" onClick={() => joinRoom(room.id, 'attacker')} style={{ padding: '5px 14px', fontSize: 11, background: '#ff3366', borderColor: '#ff3366' }}>
+                    <button className="btn-primary" onClick={() => joinRoom(room.id, 'attacker')} style={{ padding: '5px 14px', fontSize: 11, background: 'var(--neon-red)', borderColor: 'var(--neon-red)' }}>
                       Join Attacker
                     </button>
                   )}
@@ -114,7 +114,7 @@ export default function MultiplayerPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20 }}>
           <div className="glass-card" style={{ padding: 18 }}>
-            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 12, color: role === 'attacker' ? '#ff3366' : 'var(--neon-green)', fontFamily: 'JetBrains Mono' }}>
+            <div style={{ fontSize: 16, fontWeight: 700, marginBottom: 12, color: role === 'attacker' ? 'var(--neon-red)' : 'var(--neon-green)', fontFamily: 'JetBrains Mono' }}>
               YOU ARE THE {role?.toUpperCase()}
             </div>
             <div style={{ padding: '14px 16px', background: 'rgba(0,0,0,0.3)', borderRadius: 8, marginBottom: 16 }}>
@@ -130,7 +130,7 @@ export default function MultiplayerPage() {
                   className="cyber-input" 
                   style={{ width: '100%', marginBottom: 10 }}
                 />
-                <button onClick={sendPayload} className="btn-primary" style={{ background: '#ff3366', borderColor: '#ff3366', width: '100%' }}>Launch Live Exploit</button>
+                <button onClick={sendPayload} className="btn-primary" style={{ background: 'var(--neon-red)', borderColor: 'var(--neon-red)', width: '100%' }}>Launch Live Exploit</button>
               </div>
             )}
             {role === 'defender' && (
@@ -146,9 +146,9 @@ export default function MultiplayerPage() {
             <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono', marginBottom: 10 }}>📜 LIVE ARENA LOGS</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxHeight: 400, overflowY: 'auto' }}>
               {logs.map((log, i) => (
-                <div key={i} style={{ fontSize: 11, padding: 8, background: 'rgba(0,0,0,0.4)', borderRadius: 6, borderLeft: `2px solid ${log.type === 'attack' ? '#ff3366' : 'var(--neon-green)'}` }}>
+                <div key={i} style={{ fontSize: 11, padding: 8, background: 'var(--bg-secondary)', borderRadius: 6, borderLeft: `2px solid ${log.type === 'attack' ? 'var(--neon-red)' : 'var(--neon-green)'}` }}>
                   <span style={{ color: 'var(--text-muted)' }}>{new Date(log.time).toLocaleTimeString()}</span><br/>
-                  <span style={{ color: log.type === 'attack' ? '#ff3366' : 'var(--neon-green)' }}>{log.type.toUpperCase()}:</span> {log.data}
+                  <span style={{ color: log.type === 'attack' ? 'var(--neon-red)' : 'var(--neon-green)' }}>{log.type.toUpperCase()}:</span> {log.data}
                 </div>
               ))}
             </div>

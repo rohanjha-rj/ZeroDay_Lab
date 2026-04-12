@@ -20,28 +20,28 @@ const NAV_SECTIONS = [
   {
     title: 'Attack Labs',
     items: [
-      { label: 'XSS Attack', href: '/labs/xss', icon: Code2, severity: 'high', color: '#ffcc00' },
-      { label: 'SQL Injection', href: '/labs/sqli', icon: Database, severity: 'critical', color: '#ff3366' },
-      { label: 'CSRF Attack', href: '/labs/csrf', icon: Globe, severity: 'high', color: '#00d4ff' },
-      { label: 'Broken Auth', href: '/labs/broken-auth', icon: Lock, severity: 'critical', color: '#a855f7' },
-      { label: 'File Upload', href: '/labs/file-upload', icon: Upload, severity: 'critical', color: '#ff6600' },
+      { label: 'XSS Attack', href: '/labs/xss', icon: Code2, severity: 'high', color: '#f59e0b' },
+      { label: 'SQL Injection', href: '/labs/sqli', icon: Database, severity: 'critical', color: '#ef4444' },
+      { label: 'CSRF Attack', href: '/labs/csrf', icon: Globe, severity: 'high', color: '#3b82f6' },
+      { label: 'Broken Auth', href: '/labs/broken-auth', icon: Lock, severity: 'critical', color: '#8b5cf6' },
+      { label: 'File Upload', href: '/labs/file-upload', icon: Upload, severity: 'critical', color: '#f97316' },
     ],
   },
   {
     title: 'Advanced Labs',
     items: [
-      { label: 'SSRF', href: '/labs/ssrf', icon: Server, severity: 'critical', color: '#00ff88' },
-      { label: 'Cmd Injection', href: '/labs/command-injection', icon: Terminal, severity: 'critical', color: '#ff3366' },
-      { label: 'IDOR', href: '/labs/idor', icon: UserX, severity: 'high', color: '#a855f7' },
+      { label: 'SSRF', href: '/labs/ssrf', icon: Server, severity: 'critical', color: '#10b981' },
+      { label: 'Cmd Injection', href: '/labs/command-injection', icon: Terminal, severity: 'critical', color: '#ef4444' },
+      { label: 'IDOR', href: '/labs/idor', icon: UserX, severity: 'high', color: '#8b5cf6' },
     ],
   },
 ];
 
 const SEVERITY_COLORS: Record<string, string> = {
-  critical: '#ff3366',
-  high: '#ff6600',
-  medium: '#ffcc00',
-  low: '#00d4ff',
+  critical: '#ef4444',
+  high: '#f59e0b',
+  medium: '#f97316',
+  low: '#3b82f6',
 };
 
 export default function Sidebar() {
@@ -49,13 +49,13 @@ export default function Sidebar() {
 
   return (
     <aside
-      style={{ width: 220, background: 'rgba(10,20,40,0.95)', borderRight: '1px solid rgba(0,255,136,0.08)', flexShrink: 0 }}
+      style={{ width: 220, background: 'var(--bg-glass)', borderRight: '1px solid rgba(255,255,255,0.05)', flexShrink: 0 }}
       className="flex flex-col h-full overflow-y-auto py-4"
     >
       {/* Logo */}
       <div className="px-4 mb-6">
         <div className="flex items-center gap-2">
-          <div style={{ background: 'linear-gradient(135deg, #00ff88, #00d4ff)', borderRadius: 8, padding: 6 }}>
+          <div style={{ background: 'var(--accent-gradient)', borderRadius: 8, padding: 6 }}>
             <Shield size={18} color="#050a10" />
           </div>
           <div>
@@ -102,7 +102,7 @@ export default function Sidebar() {
       ))}
 
       {/* Bottom status */}
-      <div className="mt-auto px-4 pt-4" style={{ borderTop: '1px solid rgba(0,255,136,0.06)' }}>
+      <div className="mt-auto px-4 pt-4" style={{ borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="flex items-center gap-2 mb-2">
           <span className="status-dot online" />
           <span style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }}>LAB ACTIVE</span>

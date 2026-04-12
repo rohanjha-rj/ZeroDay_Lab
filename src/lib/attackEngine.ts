@@ -61,7 +61,7 @@ export function simulateXSS(payload: string, target: 'reflected' | 'stored' | 'd
   return {
     success: true,
     severity: hasCookieSteal || hasFetch ? 'critical' : 'high',
-    title: target === 'stored' ? '🔴 Stored XSS Executed!' : '🟡 Reflected XSS Executed!',
+    title: target === 'stored' ? 'Stored XSS Executed!' : 'Reflected XSS Executed!',
     description: hasCookieSteal
       ? `Session cookie exfiltrated! Token: ${cookieValue?.split(';')[0]}. The victim's session is now compromised.`
       : `Script injected and executed in the browser context. A real attacker could steal cookies, log keystrokes, or redirect users.`,
@@ -132,7 +132,7 @@ export async function simulateSQLi(payload: string, extra?: string): Promise<Att
   return {
     success: true,
     severity: isDestructive ? 'critical' : isUnion ? 'high' : 'high',
-    title: isDestructive ? '💣 Destructive Query Executed!' : isUnion ? '🗄️ Database Dumped via UNION!' : '🔓 Authentication Bypassed!',
+    title: isDestructive ? 'Destructive Query Executed!' : isUnion ? 'Database Dumped via UNION!' : 'Authentication Bypassed!',
     description: `REAL EXPLOIT EXECUTED! The database returned ${usersReturned} rows.`,
     serverResponse: `HTTP 200 OK\n\n${JSON.stringify(data.data, null, 2)}`,
     dbQuery: data.executedQuery,
@@ -171,7 +171,7 @@ export function simulateCSRF(payload: string): AttackOutcome {
   return {
     success: true,
     severity: 'high',
-    title: '💸 CSRF Attack Successful!',
+    title: 'CSRF Attack Successful!',
     description: hasAmount
       ? 'A forged fund transfer was submitted from the victim\'s session. $10,000 sent to attacker account without victim knowledge.'
       : 'Cross-site request successfully forged using victim\'s active session cookies.',
@@ -213,7 +213,7 @@ export function simulateBrokenAuth(payload: string): AttackOutcome {
     return {
       success: true,
       severity: 'critical',
-      title: '🔑 JWT alg:none Bypass!',
+      title: 'JWT alg:none Bypass!',
       description: 'JWT signature verification skipped! The server accepted an unsigned token with admin privileges.',
       serverResponse: `HTTP/1.1 200 OK\n\n{"user":"admin","role":"superadmin","permissions":["read","write","delete","admin_panel"]}`,
       xpEarned: 100,
@@ -232,7 +232,7 @@ export function simulateBrokenAuth(payload: string): AttackOutcome {
     return {
       success: true,
       severity: 'critical',
-      title: '👑 Privilege Escalation via Cookie!',
+      title: 'Privilege Escalation via Cookie!',
       description: 'Role parameter in cookie was not server-side validated. Admin access granted by simply modifying the cookie.',
       serverResponse: `HTTP/1.1 200 OK\n\n{"redirect":"/admin/dashboard","user":"current_user","role":"superadmin"}`,
       xpEarned: 90,
@@ -250,7 +250,7 @@ export function simulateBrokenAuth(payload: string): AttackOutcome {
   return {
     success: true,
     severity: 'high',
-    title: '🔓 Weak Credentials Accepted!',
+    title: 'Weak Credentials Accepted!',
     description: 'Common password found in the credential database. Account compromised via brute-force/credential stuffing.',
     serverResponse: `HTTP/1.1 200 OK\nSet-Cookie: session=ADMIN_TOKEN_4A8F\n\n{"user":"admin","last_login":"2024-01-15","role":"admin"}`,
     xpEarned: 40,
@@ -304,7 +304,7 @@ export async function simulateFileUpload(payload: string, filename: string): Pro
   return {
     success: true,
     severity: 'critical',
-    title: '💀 Webshell Uploaded & Executing!',
+    title: 'Webshell Uploaded & Executing!',
     description: data.detail,
     serverResponse: `HTTP/1.1 200 OK\n\n${JSON.stringify({ file: data.file, url: data.url, output: data.output }, null, 2)}`,
     xpEarned: 120,
@@ -342,7 +342,7 @@ export function simulateSSRF(url: string): AttackOutcome {
     return {
       success: true,
       severity: 'critical',
-      title: '☁️ AWS Credentials Stolen via SSRF!',
+      title: 'AWS Credentials Stolen via SSRF!',
       description: 'Accessed the AWS EC2 metadata service and retrieved IAM role credentials! Full AWS account compromised.',
       serverResponse: `HTTP/1.1 200 OK\n\n{\n  "Code": "Success",\n  "AccessKeyId": "ASIA4EXAMPLE23KEY",\n  "SecretAccessKey": "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",\n  "Token": "AQoXnyc4lcK4w...",\n  "Expiration": "2024-12-31T23:59:59Z"\n}`,
       xpEarned: 120,
@@ -361,7 +361,7 @@ export function simulateSSRF(url: string): AttackOutcome {
   return {
     success: true,
     severity: 'high',
-    title: '🏠 Internal Service Accessed!',
+    title: 'Internal Service Accessed!',
     description: isInternalNetwork
       ? 'Pivoted into the internal network. Internal service at 192.168.x.x accessed through server as proxy.'
       : 'Accessed the internal admin panel at localhost. Sensitive admin interface exposed!',
@@ -406,7 +406,7 @@ export function simulateCommandInjection(payload: string): AttackOutcome {
     return {
       success: true,
       severity: 'critical',
-      title: '🐚 Reverse Shell Established!',
+      title: 'Reverse Shell Established!',
       description: 'Attacker now has interactive shell access to the server. Full system compromised.',
       serverResponse: `PING 127.0.0.1\n[+] Connecting to attacker.com:4444...\n[+] Bash reverse shell spawned\nroot@server:~# `,
       xpEarned: 150,
@@ -425,7 +425,7 @@ export function simulateCommandInjection(payload: string): AttackOutcome {
     return {
       success: true,
       severity: 'critical',
-      title: '📂 /etc/passwd Dumped!',
+      title: '/etc/passwd Dumped!',
       description: 'System password file read via command injection. User accounts and home directories exposed.',
       serverResponse: `PING output:\nroot:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nadmin:x:1000:1000:,,,:/home/admin:/bin/bash`,
       xpEarned: 80,
@@ -443,7 +443,7 @@ export function simulateCommandInjection(payload: string): AttackOutcome {
   return {
     success: true,
     severity: 'high',
-    title: '⚡ Command Injection Confirmed!',
+    title: 'Command Injection Confirmed!',
     description: hasWhoami
       ? 'Command injection successful. Server is running as www-data. Can now enumerate system and escalate.'
       : 'OS command injected and executed successfully on the server.',
@@ -487,7 +487,7 @@ export function simulateIDOR(endpoint: string, currentUserId: number = 5): Attac
     return {
       success: true,
       severity: 'high',
-      title: '📄 Unauthorized File Access!',
+      title: 'Unauthorized File Access!',
       description: 'Accessed a private file belonging to another user. No authorization check was performed on the object reference.',
       serverResponse: `HTTP/1.1 200 OK\nContent-Type: application/pdf\n\n[CONFIDENTIAL DOCUMENT]\nAdmin Security Report Q4 2024\nVulnerabilities: 47 critical\nAPI Keys: sk-prod-XXXXX\nDB Password: Pr0d-DB-S3cr3t!`,
       xpEarned: 80,
@@ -505,7 +505,7 @@ export function simulateIDOR(endpoint: string, currentUserId: number = 5): Attac
   return {
     success: true,
     severity: isAdminAccess ? 'critical' : 'high',
-    title: isAdminAccess ? '👑 Admin Data Accessed!' : '👤 Unauthorized User Access!',
+    title: isAdminAccess ? 'Admin Data Accessed!' : 'Unauthorized User Access!',
     description: `Direct object reference to user ID ${targetId} succeeded without authorization. ${isAdminAccess ? 'Full admin profile exposed!' : "Another user's private data exposed."}`,
     serverResponse: isAdminAccess
       ? `HTTP/1.1 200 OK\n\n{"user_id":1,"username":"admin","email":"admin@company.com","role":"superadmin","api_key":"sk-admin-X9mK2p","password_hash":"$2b$10$...","2fa_backup":"823-491-027"}`
