@@ -21,8 +21,10 @@ export default function Navbar() {
   const progress = getProgressPercent();
   const [eventIdx, setEventIdx] = useState(0);
   const [time, setTime] = useState('');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const timer = setInterval(() => {
       setEventIdx((i) => (i + 1) % LIVE_EVENTS.length);
     }, 3500);
@@ -35,6 +37,30 @@ export default function Navbar() {
     }, 1000);
     return () => clearInterval(clock);
   }, []);
+
+  if (!mounted) {
+    // Provide a stable, icon-free or default version for SSR/Hydration
+    return (
+      <header
+        style={{
+          height: 56,
+          background: 'rgba(10,20,40,0.95)',
+          borderBottom: '1px solid rgba(0,255,136,0.08)',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 20px',
+          gap: 16,
+          flexShrink: 0,
+        }}
+      >
+        <div style={{ flex: 1, maxWidth: 340, position: 'relative' }}>
+          <Search size={14} style={{ position: 'absolute', left: 10, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
+          <div style={{ paddingLeft: 32, height: 32, background: 'rgba(255,255,255,0.05)', borderRadius: 8 }} />
+        </div>
+        <div style={{ flex: 1 }} />
+      </header>
+    );
+  }
 
   return (
     <header

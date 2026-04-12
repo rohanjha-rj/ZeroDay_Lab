@@ -32,6 +32,8 @@ export interface Lab {
   objectives: string[];
   hints: string[];
   cvss: number;
+  vulnerableCode: { language: string; snippet: string; description: string };
+  secureCode: string;
 }
 
 export const LABS: Lab[] = [
@@ -69,6 +71,20 @@ export const LABS: Lab[] = [
       { id: 'xss-6', name: 'DOM-based XSS', payload: "javascript:void(document.write('<script>alert(1)</script>'))", description: 'DOM manipulation vector', successCondition: 'dom', xp: 70 },
     ],
     cvss: 7.4,
+    vulnerableCode: {
+      language: 'javascript',
+      snippet: `app.get('/search', (req, res) => {
+  const query = req.query.q;
+  res.send(\`<h1>Results for: \${query}</h1>\`);
+});`,
+      description: 'The query parameter is reflected directly into the HTML response without any sanitization or encoding.'
+    },
+    secureCode: `app.get('/search', (req, res) => {
+  const query = req.query.q;
+  // Use a library like DOMPurify or escape the HTML
+  const sanitized = escapeHTML(query);
+  res.send(\`<h1>Results for: \${sanitized}</h1>\`);
+});`,
   },
   {
     id: 'lab-sqli',
@@ -104,6 +120,18 @@ export const LABS: Lab[] = [
       { id: 'sqli-6', name: 'Stacked Query', payload: "'; DROP TABLE sessions; --", description: 'Execute multiple statements (WARNING: destructive)', successCondition: 'stacked', xp: 120 },
     ],
     cvss: 9.8,
+    vulnerableCode: {
+      language: 'javascript',
+      snippet: `const query = "SELECT * FROM users WHERE username='" + req.body.username + "' AND password='" + req.body.password + "'";
+db.query(query, (err, result) => {
+  if (result.length > 0) res.send("Logged in!");
+});`,
+      description: 'User input is concatenated directly into the SQL string, allowing attackers to manipulate the query logic.'
+    },
+    secureCode: `const query = "SELECT * FROM users WHERE username = ? AND password = ?";
+db.query(query, [req.body.username, req.body.password], (err, result) => {
+  if (result.length > 0) res.send("Logged in!");
+});`,
   },
   {
     id: 'lab-csrf',

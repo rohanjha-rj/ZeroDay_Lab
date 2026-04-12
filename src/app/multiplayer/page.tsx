@@ -14,7 +14,11 @@ export default function MultiplayerPage() {
   const [payloadText, setPayloadText] = useState('');
 
   // Auto-generate a dummy username for this session
-  const [username] = useState(`hacker_${Math.floor(Math.random() * 1000)}`);
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    setUsername(`hacker_${Math.floor(Math.random() * 1000)}`);
+  }, []);
 
   useEffect(() => {
     socket = io('http://localhost:3001');
@@ -71,11 +75,11 @@ export default function MultiplayerPage() {
       {!joined ? (
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: 20 }}>
           <div className="glass-card" style={{ padding: 18 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, flexWrap: 'wrap', gap: 10 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', fontFamily: 'JetBrains Mono', whiteSpace: 'nowrap' }}>
                 Live Combat Rooms
               </div>
-              <button className="btn-primary" onClick={createRoom} style={{ padding: '6px 16px', fontSize: 12 }}>
+              <button className="btn-primary" onClick={createRoom} style={{ padding: '6px 16px', fontSize: 12, flexShrink: 0 }}>
                 + Create Room
               </button>
             </div>
