@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------------------------------
+// SYSTEM TABLES (Gamification & Progress)
+// -----------------------------------------------------
+
+model Player {
+  id            String          @id @default(uuid())
+  username      String          @unique
+  xp            Int             @default(0)
+  totalAttacks  Int             @default(0)
+  hintsUsed     Int             @default(0)
+  badges        String          @default("") // Comma-separated badge IDs
+  completedLabs LabCompletion[]
+  createdAt     DateTime        @default(now())
+}
+
+model LabCompletion {
+  id          String   @id @default(uuid())
+  labId       String
+  playerId    String
+  xpEarned    Int
+  timeSeconds Int
+  hintsUsed   Int
+  completedAt DateTime @default(now())
+  
+  player Player @relation(fields: [playerId], references: [id], onDelete: Cascade)
+}
+
+// -----------------------------------------------------
+// VULNERABLE LAB TABLES (SQLi, Broken Auth, IDOR)
+// -----------------------------------------------------
+
+// Used in SQL Injection Lab
+model VulnUser {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  role     String @default("user")
+}
+
+// Used in CSRF / SSRF / IDOR Labs
+model VulnTransaction {
+  id      String   @id @default(uuid()) // TX id
+  userId  Int
+  to      String
+  amount  Int
+  date    DateTime @default(now())
+}
+
+model VulnProfile {
+  id    Int    @id @default(autoincrement())
+  name  String
+  email String
+  role  String
+}
