@@ -1,4 +1,4 @@
-# 🛡️ ZeroDay Lab (v3.5 — "Cyber OS Next")
+# 🛡️ ZeroDay Lab (v1.0.0)
 
 A state-of-the-art, professional-grade **cybersecurity simulation platform**. ZeroDay Lab (Cyber OS) provides an immersive, windowed environment where users can master real-world attack vectors, visualize network exploits in 3D, and engage in high-stakes "Red vs Blue" training.
 
