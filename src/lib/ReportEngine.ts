@@ -32,7 +32,7 @@ export const generateTechnicalReport = (data: ReportData) => {
   doc.text('ZERODAY LAB // AUDIT_REPORT', 15, 20);
 
   doc.setFontSize(10);
-  doc.setTextColor(...primaryColor);
+  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
   doc.text(`SESSION_ID: ${Math.random().toString(36).substring(7).toUpperCase()}`, 15, 30);
   doc.text(`TARGET: ${lab.title.toUpperCase()}`, 130, 30);
 
@@ -82,7 +82,7 @@ export const generateTechnicalReport = (data: ReportData) => {
   doc.text(`The ${lab.title} vulnerability identified in the target app allows for ${lab.description.toLowerCase()}`, 15, finalY + 10, { maxWidth: 180 });
 
   // Patch Information
-  doc.setTextColor(...primaryColor);
+  doc.setTextColor(primaryColor[0], primaryColor[1], primaryColor[2]);
   doc.text('>>> REMEDIATION_STRATEGY', 15, finalY + 30);
   doc.setTextColor(0, 0, 0);
   doc.setFont('courier', 'italic');
