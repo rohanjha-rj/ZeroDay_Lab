@@ -21,16 +21,16 @@ export const generateTechnicalReport = (data: ReportData) => {
   // Styling
   const primaryColor = [16, 185, 129]; // Neon Green
   const bgColor = [10, 15, 20];
-  
+
   // Header
-  doc.setFillColor(...bgColor);
+  doc.setFillColor(bgColor[0], bgColor[1], bgColor[2]);
   doc.rect(0, 0, 210, 40, 'F');
-  
+
   doc.setTextColor(255, 255, 255);
   doc.setFont('courier', 'bold');
   doc.setFontSize(24);
   doc.text('ZERODAY LAB // AUDIT_REPORT', 15, 20);
-  
+
   doc.setFontSize(10);
   doc.setTextColor(...primaryColor);
   doc.text(`SESSION_ID: ${Math.random().toString(36).substring(7).toUpperCase()}`, 15, 30);
@@ -77,7 +77,7 @@ export const generateTechnicalReport = (data: ReportData) => {
   const finalY = (doc as any).lastAutoTable.finalY + 15;
   doc.setFontSize(14);
   doc.text('>>> VULNERABILITY_SYNOPSIS', 15, finalY);
-  
+
   doc.setFontSize(10);
   doc.text(`The ${lab.title} vulnerability identified in the target app allows for ${lab.description.toLowerCase()}`, 15, finalY + 10, { maxWidth: 180 });
 
