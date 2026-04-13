@@ -236,7 +236,7 @@ export default function AttackVisualizer({ visualization, isRunning }: Props) {
         {/* Step label */}
         {currentStep && (
           <g>
-            <rect x="160" y="282" width="260" height="28" rx="6" fill="rgba(0,0,0,0.8)" border="1px solid rgba(255,255,255,0.05)" />
+            <rect x="160" y="282" width="260" height="28" rx="6" fill="rgba(0,0,0,0.8)" stroke='rgba(255,255,255,0.05)' strokeWidth="1" />
             <text x="290" y="300" textAnchor="middle" fontSize="10" fill="var(--text-secondary)" fontFamily="JetBrains Mono">
               {currentStep.label}
             </text>
